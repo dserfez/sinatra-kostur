@@ -17,11 +17,9 @@ configure do
     use Rack::Session::Pool,
       :expire_after => 900,
       :key => 'JSESSIONID'
-#      set :logger, Logger.new(STDOUT)
+      set :logger, Logger.new(STDOUT)
 #logger = Logger.new(STDOUT)
     set :root, APP_ROOT
-    set :port, 8081
-    set :bind, '0.0.0.0'
     (set :show_exceptions, false) if (settings.environment == :production)
     #enable :sessions
     set :session_secret, '9y7lIjCPUByfJVwjGyY77Tt5oCrtVhZi'
@@ -29,8 +27,12 @@ end
 
 before do
   session[:errors] || session[:errors] = {}
-  content_type 'application/json'
+  #content_type 'application/json'
   #redirect to '/login' unless (authenticated? or request.path == '/login')
+end
+
+error 500 do
+  status 403
 end
 
 def authorized?

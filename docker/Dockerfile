@@ -7,7 +7,7 @@ RUN apk update \
 	ruby ruby-json ruby-io-console ruby-rake ruby-bigdecimal \
   && apk add --no-cache --virtual .build-deps \
         sudo build-base ruby-dev linux-headers \
-  && gem install --no-ri --no-rdoc unicorn sinatra bundler tilt \
+  && gem install --no-ri --no-rdoc unicorn sinatra bundler tilt logger \
   && apk del .build-deps \
   && rm -rf /var/cache/apk/* /tmp/* /var/tmp/* /usr/lib/ruby/gems/*/cache/*.gem
 
